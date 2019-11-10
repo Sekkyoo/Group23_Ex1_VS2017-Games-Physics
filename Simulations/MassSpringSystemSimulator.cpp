@@ -221,7 +221,7 @@ void MassSpringSystemSimulator::stepEuler(float timeStep) {
 
 		m_massPoints[i].position += m_massPoints[i].Velocity * timeStep;
 		if(m_systems[m_testCase].clamp)
-			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f);
+			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f, i);
 	
 
 		m_massPoints[i].Velocity += accelorations[i] * timeStep;
@@ -241,7 +241,7 @@ void MassSpringSystemSimulator::stepLeapFrog(float timeStep) {
 
 		m_massPoints[i].position += m_massPoints[i].Velocity * timeStep + m_mouseOffset;
 		if (m_systems[m_testCase].clamp)
-			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f);
+			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f, i);
 
 
 	}
@@ -275,7 +275,7 @@ void MassSpringSystemSimulator::stepMidPoint(float timeStep) {
 			continue;
 		m_massPoints[i].position = (m_massPoints[i].position + timeStep * velOfMidstep[i]) + m_mouseOffset;
 		if(m_systems[m_testCase].clamp)
-			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f);
+			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f, i);
 	}
 
 	// Calculate new velocity.
@@ -289,13 +289,15 @@ void MassSpringSystemSimulator::stepMidPoint(float timeStep) {
 	}
 }
 
-Vec3 MassSpringSystemSimulator::ClampVector(Vec3 input, float minimum, float maximum)
+Vec3 MassSpringSystemSimulator::ClampVector(Vec3 input, float minimum, float maximum, int pointIndex)
 {
 	cout << m_systems[m_testCase].clamp << endl;
 	if (!m_systems[m_testCase].clamp)
 		return input;
 	input.makeFloor(Vec3(minimum, minimum, minimum));
 	input.makeCeil(Vec3(maximum, maximum, maximum));
+	if (input.y == minimum)
+		m_massPoints[pointIndex].Velocity.y = 0;
 	return input;
 }
 
@@ -420,7 +422,7 @@ MassSpringSystem MassSpringSystemSimulator::CreateSetUp1() {
 	addSpring(p0, p1, 1.0);
 	setIntegrator(EULER);
 
-	return { m_massPoints, 2, m_springs, 1, m_fDamping, m_fStiffness, m_fMass, Vec3(0, 0, 0), false, false, m_iIntegrator};
+	return { m_massPoints, 2, m_springs, 1, m_fDamping, m_fStiffness, m_fMass, Vec3(0, 0, 0), false, false, m_iIntegrator, false};
 }
 
 MassSpringSystem MassSpringSystemSimulator::CreateSetUp2() {

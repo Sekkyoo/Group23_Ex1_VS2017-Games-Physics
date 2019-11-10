@@ -75,7 +75,7 @@ public:
 	void stepMidPoint(float timeStep);
 	Vec3* MassSpringSystemSimulator::computeAcceloration();
 	Vec3* MassSpringSystemSimulator::computeAcceloration(Vec3* points);
-	Vec3 ClampVector(Vec3 input, float min, float max);
+	Vec3 ClampVector(Vec3 input, float min, float max, int pointIndex);
 
 	void ChangeSetUp(MassSpringSystem system);
 	MassSpringSystem CreateSetUp1();
