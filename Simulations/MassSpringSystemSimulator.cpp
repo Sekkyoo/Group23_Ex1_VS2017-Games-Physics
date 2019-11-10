@@ -274,8 +274,25 @@ void MassSpringSystemSimulator::stepMidPoint(float timeStep) {
 		if (m_massPoints[i].isFixed)
 			continue;
 		m_massPoints[i].position = (m_massPoints[i].position + timeStep * velOfMidstep[i]) + m_mouseOffset;
-		if(m_systems[m_testCase].clamp)
+		if (m_systems[m_testCase].clamp)
+		{
+			if (abs(m_massPoints[i].position.x) > .5)
+			{
+				m_massPoints[i].orignalVelocity.x = 0;
+				m_massPoints[i].Velocity.x = 0;
+			}
+			if (abs(m_massPoints[i].position.y) > .5)
+			{
+				m_massPoints[i].orignalVelocity.y = 0;
+				m_massPoints[i].Velocity.y = 0;
+			}
+			if (abs(m_massPoints[i].position.z) > .5)
+			{
+				m_massPoints[i].orignalVelocity.z = 0;
+				m_massPoints[i].Velocity.z = 0;
+			}
 			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f);
+		}
 	}
 
 	// Calculate new velocity.
