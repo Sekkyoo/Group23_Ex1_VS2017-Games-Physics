@@ -1,0 +1,47 @@
+﻿  MassSpringSystemSimulator.cpp
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(11): warning C4005: "NOMINMAX": Makro-Neudefinition
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp: note: Siehe vorherige Definition von "NOMINMAX"
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.h(102): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.h(105): warning C4305: "Initialisierung": Verkürzung von "double" in "float"
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(111): warning C4305: "Argument": Verkürzung von "double" in "float"
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(115): warning C4305: "Argument": Verkürzung von "double" in "float"
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(319): warning C4244: "Initialisierung": Konvertierung von "double" in "float", möglicher Datenverlust
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(520): warning C4305: "Argument": Verkürzung von "double" in "float"
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(522): warning C4305: "Argument": Verkürzung von "double" in "float"
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(563): warning C4305: "Argument": Verkürzung von "double" in "float"
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(204): warning C4244: "Argument": Konvertierung von "const Scalar" in "float", möglicher Datenverlust
+          with
+          [
+              Scalar=GamePhysics::Real
+          ]
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(203): note: Bei der Kompilierung von Klasse Vorlage der DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const-Memberfunktion
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\drawingutilitiesclass.h(285): note: Siehe Verweis auf die Instanziierung der gerade kompilierten Funktions-Vorlage "DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const".
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(859): note: Siehe Verweis auf die Klasse Vorlage-Instanziierung "GamePhysics::vector3Dim<GamePhysics::Real>", die kompiliert wird.
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(1117): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1961): note: Siehe Deklaration von "_snprintf"
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(1115): note: Bei der Kompilierung von Klasse Vorlage der std::string GamePhysics::vector3Dim<GamePhysics::Real>::toString(void)-Memberfunktion
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(189): note: Siehe Verweis auf die Instanziierung der gerade kompilierten Funktions-Vorlage "std::string GamePhysics::vector3Dim<GamePhysics::Real>::toString(void)".
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(777): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+          with
+          [
+              Scalar=double
+          ]
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(773): note: Bei der Kompilierung von Klasse Vorlage der DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)-Memberfunktion
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\drawingutilitiesclass.h(380): note: Siehe Verweis auf die Instanziierung der gerade kompilierten Funktions-Vorlage "DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)".
+  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\drawingutilitiesclass.h(379): note: Siehe Verweis auf die Klasse Vorlage-Instanziierung "GamePhysics::matrix4x4<double>", die kompiliert wird.
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(776): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+          with
+          [
+              Scalar=double
+          ]
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(775): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+          with
+          [
+              Scalar=double
+          ]
+c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(774): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+          with
+          [
+              Scalar=double
+          ]
+  Demo_2017.vcxproj -> C:\Users\sekky\Desktop\gamephysicstemplate-master\Win32\Debug\Simulations.lib
