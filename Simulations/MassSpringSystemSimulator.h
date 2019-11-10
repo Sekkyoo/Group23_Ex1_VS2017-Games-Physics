@@ -75,7 +75,8 @@ public:
 	void stepMidPoint(float timeStep);
 	Vec3* MassSpringSystemSimulator::computeAcceloration();
 	Vec3* MassSpringSystemSimulator::computeAcceloration(Vec3* points);
-	Vec3 ClampVector(Vec3 input, float min, float max, int pointIndex);
+	void ClampVeclocity(int massPointIndex);
+	Vec3 ClampVector(Vec3 input, float min, float max);
 
 	void ChangeSetUp(MassSpringSystem system);
 	MassSpringSystem CreateSetUp1();
@@ -102,7 +103,7 @@ private:
 	int m_mouseMovementThreshHold = 0.2f;
 	int m_testCase = 0;
 	bool m_useGravity = false;
-	float m_gravity = -0.002;
+	float m_gravity = -0.003;
 
 	const int fieldBuffer = 10;
 

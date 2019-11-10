@@ -220,8 +220,11 @@ void MassSpringSystemSimulator::stepEuler(float timeStep) {
 			continue;
 
 		m_massPoints[i].position += m_massPoints[i].Velocity * timeStep;
-		if(m_systems[m_testCase].clamp)
-			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f, i);
+		if (m_systems[m_testCase].clamp)
+		{
+			ClampVeclocity(i);
+			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f);
+		}
 	
 
 		m_massPoints[i].Velocity += accelorations[i] * timeStep;
@@ -241,7 +244,10 @@ void MassSpringSystemSimulator::stepLeapFrog(float timeStep) {
 
 		m_massPoints[i].position += m_massPoints[i].Velocity * timeStep + m_mouseOffset;
 		if (m_systems[m_testCase].clamp)
-			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f, i);
+		{
+			ClampVeclocity(i);
+			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f);
+		}
 
 
 	}
@@ -276,21 +282,7 @@ void MassSpringSystemSimulator::stepMidPoint(float timeStep) {
 		m_massPoints[i].position = (m_massPoints[i].position + timeStep * velOfMidstep[i]) + m_mouseOffset;
 		if (m_systems[m_testCase].clamp)
 		{
-			if (abs(m_massPoints[i].position.x) > .5)
-			{
-				m_massPoints[i].orignalVelocity.x = 0;
-				m_massPoints[i].Velocity.x = 0;
-			}
-			if (abs(m_massPoints[i].position.y) > .5)
-			{
-				m_massPoints[i].orignalVelocity.y = 0;
-				m_massPoints[i].Velocity.y = 0;
-			}
-			if (abs(m_massPoints[i].position.z) > .5)
-			{
-				m_massPoints[i].orignalVelocity.z = 0;
-				m_massPoints[i].Velocity.z = 0;
-			}
+			ClampVeclocity(i);
 			m_massPoints[i].position = ClampVector(m_massPoints[i].position, 0.5f, -0.5f);
 		}
 	}
@@ -306,15 +298,32 @@ void MassSpringSystemSimulator::stepMidPoint(float timeStep) {
 	}
 }
 
-Vec3 MassSpringSystemSimulator::ClampVector(Vec3 input, float minimum, float maximum, int pointIndex)
+
+void MassSpringSystemSimulator::ClampVeclocity(int massPointIndex)
 {
-	cout << m_systems[m_testCase].clamp << endl;
+	if (abs(m_massPoints[massPointIndex].position.x) > .5)
+	{
+		m_massPoints[massPointIndex].orignalVelocity.x = 0;
+		m_massPoints[massPointIndex].Velocity.x = 0;
+	}
+	if (abs(m_massPoints[massPointIndex].position.y) > .5)
+	{
+		m_massPoints[massPointIndex].orignalVelocity.y = 0;
+		m_massPoints[massPointIndex].Velocity.y = 0;
+	}
+	if (abs(m_massPoints[massPointIndex].position.z) > .5)
+	{
+		m_massPoints[massPointIndex].orignalVelocity.z = 0;
+		m_massPoints[massPointIndex].Velocity.z = 0;
+	}
+}
+
+Vec3 MassSpringSystemSimulator::ClampVector(Vec3 input, float minimum, float maximum)
+{
 	if (!m_systems[m_testCase].clamp)
 		return input;
 	input.makeFloor(Vec3(minimum, minimum, minimum));
 	input.makeCeil(Vec3(maximum, maximum, maximum));
-	if (input.y == minimum)
-		m_massPoints[pointIndex].Velocity.y = 0;
 	return input;
 }
 
@@ -333,7 +342,6 @@ Vec3* MassSpringSystemSimulator::computeAcceloration(Vec3* points)
 	Vec3* acc = new Vec3[m_massPointCount];
 	for (int i = 0; i < m_springCount; i++)
 	{
-		// cout << "Spring: " + std::to_string(i) << endl;
 		Vec3 dir = points[m_springs[i].masspoint1] - points[m_springs[i].masspoint2];
 		float distance = sqrt(pow(dir.x, 2) + pow(dir.y, 2) + pow(dir.z, 2));
 
