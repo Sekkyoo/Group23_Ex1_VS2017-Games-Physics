@@ -6,7 +6,8 @@ public:
 	RigidBody(Vec3 position, Vec3 size, float mass);
 	~RigidBody();
 
-	void simulate(double step, Vec3 force, Vec3 forcePoint);
+	void applyForce(Vec3 &position, Vec3 &force);
+	void simulate(double step);
 
 	double m_mass;
 	Vec3 m_position;
@@ -15,6 +16,9 @@ public:
 	Quat m_rotation;
 	Vec3 m_angularVelocity;
 	Vec3 m_angularMomentum;
+
+	Vec3 m_force;
+	Vec3 m_torque;
 
 	Mat4 m_inertiaTensor;
 };
@@ -27,7 +31,7 @@ public:
 	int RigidBodyCount();
 	RigidBody *GetRigidBody(int index);
 	void ClearRigidBodies();
-	void Simulate(double step, Vec3 &force, Vec3 &forcePoint);
+	void Simulate(double step);
 	void draw(DrawingUtilitiesClass *duc);
 	~RigidBodySystem();
 

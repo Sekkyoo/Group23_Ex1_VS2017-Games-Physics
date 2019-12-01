@@ -10,6 +10,9 @@ RigidBody::RigidBody(Vec3 position, Vec3 size, float mass)
 	m_angularMomentum = Vec3(0.0, 0.0, 0.0);
 	m_mass = mass;
 
+	m_force = Vec3(0.0, 0.0, 0.0);
+	m_torque = Vec3(0.0, 0.0, 0.0);
+
 	m_inertiaTensor = Mat4(
 		(size.Y*size.Y + size.Z*size.Z) * (mass / 12.0), 0.0, 0.0, 0.0,
 		0.0, (size.X*size.X + size.Z*size.Z) * (mass / 12.0), 0.0, 0.0,
@@ -22,14 +25,19 @@ RigidBody::~RigidBody()
 {
 }
 
-void RigidBody::simulate(double step, Vec3 force, Vec3 forcePoint)
+void RigidBody::applyForce(Vec3 &position, Vec3 &force)
 {
-	Vec3 torque = cross(force, forcePoint - m_position);
+	m_torque += cross(force, position - m_position);
+	m_force += force;
+}
 
+void RigidBody::simulate(double step)
+{
 	m_rotation += (Quat(m_angularVelocity.x, m_angularVelocity.y, m_angularVelocity.z, 0.0) * m_rotation) * step * 0.5;
 	m_rotation.norm();
 
-	m_angularMomentum += step * torque;
+	m_angularMomentum += step * m_torque;
+	m_torque = Vec3(0.0, 0.0, 0.0);
 
 	Mat4 rotationMatrix = m_rotation.getRotMat();
 	Mat4 rotationMatrixTransposed = m_rotation.getRotMat();
@@ -40,7 +48,8 @@ void RigidBody::simulate(double step, Vec3 force, Vec3 forcePoint)
 	cout << "Angular Velocity: " << m_angularVelocity << endl;
 
 	m_position += m_velocity * step;
-	m_velocity += force / m_mass;
+	m_velocity += (m_force * step) / m_mass;
+	m_force = Vec3(0.0, 0.0, 0.0);
 	cout << "Linear Velocity: " << m_velocity << endl;
 }
 
@@ -69,10 +78,10 @@ void RigidBodySystem::ClearRigidBodies()
 	m_rigidbodies.clear();
 }
 
-void RigidBodySystem::Simulate(double step, Vec3 &force, Vec3 &forcePoint)
+void RigidBodySystem::Simulate(double step)
 {
 	for (auto &rb : m_rigidbodies) {
-		rb.simulate(step, force, forcePoint);
+		rb.simulate(step);
 	}
 }
 
