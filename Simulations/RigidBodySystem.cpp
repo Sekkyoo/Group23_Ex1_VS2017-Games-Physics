@@ -34,7 +34,7 @@ void RigidBody::applyForce(Vec3 &position, Vec3 &force)
 void RigidBody::simulate(double step)
 {
 	m_rotation += (Quat(m_angularVelocity.x, m_angularVelocity.y, m_angularVelocity.z, 0.0) * m_rotation) * step * 0.5;
-	m_rotation.norm();
+	m_rotation = m_rotation.unit();
 
 	m_angularMomentum += step * m_torque;
 	m_torque = Vec3(0.0, 0.0, 0.0);
