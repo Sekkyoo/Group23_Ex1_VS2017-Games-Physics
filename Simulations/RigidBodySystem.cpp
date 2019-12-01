@@ -31,8 +31,13 @@ void RigidBody::applyForce(Vec3 &position, Vec3 &force)
 	m_force += force;
 }
 
-void RigidBody::simulate(double step)
+void RigidBody::simulate(double step, int demoId)
 {
+	if (demoId == 3)
+	{
+		//applyForce(m_position, Vec3(0.0, -9.81, 0.0));
+	}
+
 	m_rotation += (Quat(m_angularVelocity.x, m_angularVelocity.y, m_angularVelocity.z, 0.0) * m_rotation) * step * 0.5;
 	m_rotation = m_rotation.unit();
 
@@ -40,12 +45,17 @@ void RigidBody::simulate(double step)
 	m_torque = Vec3(0.0, 0.0, 0.0);
 
 	m_angularVelocity = getRotatedInverseInertiaTensor().transformVector(m_angularMomentum);
-	//cout << "Angular Velocity: " << m_angularVelocity << endl;
+	
 
 	m_position += m_velocity * step;
 	m_velocity += (m_force * step) / m_mass;
 	m_force = Vec3(0.0, 0.0, 0.0);
-	//cout << "Linear Velocity: " << m_velocity << endl;
+	
+	if (demoId == 0)
+	{
+		cout << "Angular Velocity: " << m_angularVelocity << endl;
+		cout << "Linear Velocity: " << m_velocity << endl;
+	}
 }
 
 Mat4 RigidBody::getTransformationMatrix()
@@ -90,14 +100,14 @@ void RigidBodySystem::ClearRigidBodies()
 	m_rigidbodies.clear();
 }
 
-void RigidBodySystem::Simulate(double step)
+void RigidBodySystem::simulate(double step, int demoId)
 {
-	for (auto &rb : m_rigidbodies) {
-		rb.simulate(step);
+	for (int i = 0; i < m_rigidbodies.size(); i++) {
+		m_rigidbodies.at(i).simulate(step, demoId);
 	}
 }
 
-void RigidBodySystem::resolveCollisions()
+void RigidBodySystem::resolveCollisions(int demoId)
 {
 	for (int i = 0; i < m_rigidbodies.size(); i++)
 	{
@@ -116,11 +126,12 @@ void RigidBodySystem::resolveCollisions()
 					Vec3 vel2 = rb2->m_velocity + cross(rb2->m_angularVelocity, localCollisionPos2);
 
 					double relativeVelocity = dot(vel1 - vel2, ci.normalWorld);
-					if (relativeVelocity < 0.0) {
-						rb1->m_position -= (ci.collisionPointWorld - rb1->m_position) * ci.depth * 0.5;
-						rb2->m_position -= (ci.collisionPointWorld - rb2->m_position) * ci.depth * 0.5;
+					if (relativeVelocity < 0.0)
+					{
+						rb1->m_position -= localCollisionPos1 * ci.depth * 0.5;
+						rb2->m_position -= localCollisionPos2 * ci.depth * 0.5;
 
-						double energyCoefficient = 0.1;
+						double energyCoefficient = 0.5;
 						double impulseMagnitude = (-1.0 * (1.0 + energyCoefficient) * -relativeVelocity) / (
 							(1.0 / rb1->m_mass)
 							+ (1.0 / rb2->m_mass)

@@ -8,7 +8,7 @@ public:
 	~RigidBody();
 
 	void applyForce(Vec3 &position, Vec3 &force);
-	void simulate(double step);
+	void simulate(double step, int demoId);
 	Mat4 getTransformationMatrix();
 	Mat4 getRotatedInverseInertiaTensor();
 
@@ -34,8 +34,8 @@ public:
 	int RigidBodyCount();
 	RigidBody *GetRigidBody(int index);
 	void ClearRigidBodies();
-	void Simulate(double step);
-	void resolveCollisions();
+	void simulate(double step, int demoId);
+	void resolveCollisions(int demoId);
 	void draw(DrawingUtilitiesClass *duc);
 	~RigidBodySystem();
 

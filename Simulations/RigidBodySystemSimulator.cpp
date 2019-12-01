@@ -6,7 +6,7 @@ RigidBodySystemSimulator::RigidBodySystemSimulator()
 }
 
 const char * RigidBodySystemSimulator::getTestCasesStr(){
-	return "Demo 1, Demo 2, Demo 3";
+	return "Demo 1, Demo 2, Demo 3, Demo 4";
 }
 
 void RigidBodySystemSimulator::reset(){
@@ -36,23 +36,36 @@ void RigidBodySystemSimulator::notifyCaseChanged(int testCase)
 	{
 	case 0:
 		cout << "Demo 1" << endl;
-		addRigidBody(Vec3(0.0, 0.0, 0.0), Vec3(1.0, 0.6, 0.5), 2);
+		addRigidBody(Vec3(0.0, 0.0, 0.0), Vec3(1.0, 0.6, 0.5), 2.0);
 		setOrientationOf(0, Quat(0.0, 0.0, 2 * M_PI * 0.25));
 		applyForceOnBody(0, Vec3(0.3, 0.5, 0.25), Vec3(1.0, 1.0, 0.0));
-		m_pRigidBodySystem->Simulate(2.0);
+		m_pRigidBodySystem->simulate(2.0, m_iTestCase);
 		break;
 	case 1:
 		cout << "Demo 2" << endl;
-		addRigidBody(Vec3(0.0, 0.0, 0.0), Vec3(1.0, 0.6, 0.5), 2);
+		addRigidBody(Vec3(0.0, 0.0, 0.0), Vec3(1.0, 0.6, 0.5), 2.0);
 		setOrientationOf(0, Quat(0.0, 0.0, 2 * M_PI * 0.25));
 		break;
 	case 2:
 		cout << "Demo 3" << endl;
-		addRigidBody(Vec3(0.4, 0.1, 0.0), Vec3(0.3, 0.3, 0.3), 2);
+		addRigidBody(Vec3(0.4, 0.1, 0.0), Vec3(0.3, 0.3, 0.3), 2.0);
 		applyForceOnBody(0, Vec3(0.0, 0.0, 0.0), Vec3(-200.0, 0.0, 0.0));
 
-		addRigidBody(Vec3(-0.4, 0.0, 0.1), Vec3(0.3, 0.3, 0.3), 2);
+		addRigidBody(Vec3(-0.4, 0.0, 0.1), Vec3(0.3, 0.3, 0.3), 2.0);
 		applyForceOnBody(1, Vec3(0.0, 0.0, 0.0), Vec3(200.0, 0.0, 0.0));
+	case 3:
+		cout << "Demo 4" << endl;
+		addRigidBody(Vec3(0.4, 0.1, 0.0), Vec3(0.3, 0.3, 0.3), 2.0);
+		applyForceOnBody(0, Vec3(0.0, 0.0, 0.0), Vec3(-200.0, 0.0, 0.0));
+
+		addRigidBody(Vec3(-0.4, 0.0, 0.1), Vec3(0.3, 0.3, 0.3), 2.0);
+		applyForceOnBody(1, Vec3(0.0, 0.0, 0.0), Vec3(200.0, 0.0, 0.0));
+
+		addRigidBody(Vec3(0.4, 0.6, 0.0), Vec3(0.3, 0.3, 0.3), 2.0);
+		applyForceOnBody(2, Vec3(0.0, 0.0, 0.0), Vec3(0.0, -200.0, 0.0));
+
+		addRigidBody(Vec3(-0.4, -0.6, 0.1), Vec3(0.3, 0.3, 0.3), 2.0);
+		applyForceOnBody(3, Vec3(0.0, 0.0, 0.0), Vec3(0.0, 200.0, 0.0));
 	default:
 		cout << "Empty Test!" << endl;
 		break;
@@ -72,8 +85,8 @@ void RigidBodySystemSimulator::externalForcesCalculations(float timeElapsed)
 		Vec3 inputView = Vec3((float)mouseDiff.x, (float)-mouseDiff.y, 0);
 		Vec3 inputWorld = worldViewInv.transformVectorNormal(inputView);
 
-		float inputScale = 0.01f;
-		applyForceOnBody(0, Vec3(1.0, 0.0, 0.0), inputWorld * inputScale);
+		float inputScale = 0.1f;
+		applyForceOnBody(0, m_pRigidBodySystem->GetRigidBody(0)->m_position, inputWorld * inputScale);
 	}
 }
 
@@ -81,11 +94,11 @@ void RigidBodySystemSimulator::simulateTimestep(float timeStep)
 {
 	if (m_iTestCase == 0) return;
 
-	m_pRigidBodySystem->Simulate(timeStep);
+	m_pRigidBodySystem->simulate(timeStep, m_iTestCase);
 	
 	if (m_iTestCase >= 2)
 	{
-		m_pRigidBodySystem->resolveCollisions();
+		m_pRigidBodySystem->resolveCollisions(m_iTestCase);
 	}
 }
 
