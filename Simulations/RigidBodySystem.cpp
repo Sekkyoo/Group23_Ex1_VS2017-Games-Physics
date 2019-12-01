@@ -27,7 +27,7 @@ RigidBody::~RigidBody()
 
 void RigidBody::applyForce(Vec3 &position, Vec3 &force)
 {
-	m_torque += cross(force, position - m_position);
+	m_torque += cross(force, m_position - position);
 	m_force += force;
 }
 
@@ -44,7 +44,7 @@ void RigidBody::simulate(double step)
 	rotationMatrixTransposed.transpose();
 	Mat4 rotatedInverseInertiaTensor = rotationMatrix * m_inertiaTensor.inverse() * rotationMatrixTransposed;
 
-	m_angularVelocity = rotatedInverseInertiaTensor * m_angularMomentum;
+	m_angularVelocity = rotatedInverseInertiaTensor.transformVector(m_angularMomentum);
 	cout << "Angular Velocity: " << m_angularVelocity << endl;
 
 	m_position += m_velocity * step;
