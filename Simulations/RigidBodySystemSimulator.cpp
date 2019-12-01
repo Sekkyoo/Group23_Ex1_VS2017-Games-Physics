@@ -49,10 +49,10 @@ void RigidBodySystemSimulator::notifyCaseChanged(int testCase)
 	case 2:
 		cout << "Demo 3" << endl;
 		addRigidBody(Vec3(0.4, 0.1, 0.0), Vec3(0.3, 0.3, 0.3), 2);
-		applyForceOnBody(0, Vec3(0.0, 0.0, 0.0), Vec3(-1.0, 0.0, 0.0));
+		applyForceOnBody(0, Vec3(0.0, 0.0, 0.0), Vec3(-200.0, 0.0, 0.0));
 
 		addRigidBody(Vec3(-0.4, 0.0, 0.1), Vec3(0.3, 0.3, 0.3), 2);
-		applyForceOnBody(1, Vec3(0.0, 0.0, 0.0), Vec3(1.0, 0.0, 0.0));
+		applyForceOnBody(1, Vec3(0.0, 0.0, 0.0), Vec3(200.0, 0.0, 0.0));
 	default:
 		cout << "Empty Test!" << endl;
 		break;
@@ -79,13 +79,13 @@ void RigidBodySystemSimulator::externalForcesCalculations(float timeElapsed)
 
 void RigidBodySystemSimulator::simulateTimestep(float timeStep)
 {
-	switch (m_iTestCase)
+	if (m_iTestCase == 0) return;
+
+	m_pRigidBodySystem->Simulate(timeStep);
+	
+	if (m_iTestCase >= 2)
 	{
-	case 0:
-		break;
-	default:
-		m_pRigidBodySystem->Simulate(timeStep);
-		break;
+		m_pRigidBodySystem->resolveCollisions();
 	}
 }
 

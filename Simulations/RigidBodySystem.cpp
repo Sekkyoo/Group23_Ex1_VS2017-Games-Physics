@@ -39,18 +39,30 @@ void RigidBody::simulate(double step)
 	m_angularMomentum += step * m_torque;
 	m_torque = Vec3(0.0, 0.0, 0.0);
 
-	Mat4 rotationMatrix = m_rotation.getRotMat();
-	Mat4 rotationMatrixTransposed = m_rotation.getRotMat();
-	rotationMatrixTransposed.transpose();
-	Mat4 rotatedInverseInertiaTensor = rotationMatrix * m_inertiaTensor.inverse() * rotationMatrixTransposed;
-
-	m_angularVelocity = rotatedInverseInertiaTensor.transformVector(m_angularMomentum);
-	cout << "Angular Velocity: " << m_angularVelocity << endl;
+	m_angularVelocity = getRotatedInverseInertiaTensor().transformVector(m_angularMomentum);
+	//cout << "Angular Velocity: " << m_angularVelocity << endl;
 
 	m_position += m_velocity * step;
 	m_velocity += (m_force * step) / m_mass;
 	m_force = Vec3(0.0, 0.0, 0.0);
-	cout << "Linear Velocity: " << m_velocity << endl;
+	//cout << "Linear Velocity: " << m_velocity << endl;
+}
+
+Mat4 RigidBody::getTransformationMatrix()
+{
+	Mat4 scale(0.0);
+	scale.initScaling(m_size.x, m_size.y, m_size.z);
+	Mat4 translate(0.0);
+	translate.initTranslation(m_position.x, m_position.y, m_position.z);
+	return scale * m_rotation.getRotMat() * translate;
+}
+
+Mat4 RigidBody::getRotatedInverseInertiaTensor()
+{
+	Mat4 rotationMatrix = m_rotation.getRotMat();
+	Mat4 rotationMatrixTransposed = m_rotation.getRotMat();
+	rotationMatrixTransposed.transpose();
+	return rotationMatrix * m_inertiaTensor.inverse() * rotationMatrixTransposed;
 }
 
 RigidBodySystem::RigidBodySystem()
@@ -85,14 +97,55 @@ void RigidBodySystem::Simulate(double step)
 	}
 }
 
+void RigidBodySystem::resolveCollisions()
+{
+	for (int i = 0; i < m_rigidbodies.size(); i++)
+	{
+		for (int j = 0; j < m_rigidbodies.size(); j++)
+		{
+			if (i != j)
+			{
+				RigidBody *rb1 = &m_rigidbodies.at(i);
+				RigidBody *rb2 = &m_rigidbodies.at(j);
+				CollisionInfo ci = checkCollisionSAT(rb1->getTransformationMatrix(), rb2->getTransformationMatrix());
+				if (ci.isValid) {
+					Vec3 localCollisionPos1 = ci.collisionPointWorld - rb1->m_position;
+					Vec3 vel1 = rb1->m_velocity + cross(rb1->m_angularVelocity, localCollisionPos1);
+
+					Vec3 localCollisionPos2 = ci.collisionPointWorld - rb2->m_position;
+					Vec3 vel2 = rb2->m_velocity + cross(rb2->m_angularVelocity, localCollisionPos2);
+
+					double relativeVelocity = dot(vel1 - vel2, ci.normalWorld);
+					if (relativeVelocity < 0.0) {
+						rb1->m_position -= (ci.collisionPointWorld - rb1->m_position) * ci.depth * 0.5;
+						rb2->m_position -= (ci.collisionPointWorld - rb2->m_position) * ci.depth * 0.5;
+
+						double energyCoefficient = 0.1;
+						double impulseMagnitude = (-1.0 * (1.0 + energyCoefficient) * -relativeVelocity) / (
+							(1.0 / rb1->m_mass)
+							+ (1.0 / rb2->m_mass)
+							+ dot((cross(rb1->getRotatedInverseInertiaTensor().transformVector(cross(localCollisionPos1, ci.normalWorld)), localCollisionPos1)
+								 + cross(rb2->getRotatedInverseInertiaTensor().transformVector(cross(localCollisionPos2, ci.normalWorld)), localCollisionPos1)),
+							  ci.normalWorld)
+						);
+						Vec3 impulse = impulseMagnitude * ci.normalWorld;
+
+						rb1->m_velocity -= impulse / rb1->m_mass;
+						rb2->m_velocity += impulse / rb2->m_mass;
+
+						rb1->m_angularMomentum -= cross(localCollisionPos1, impulse);
+						rb2->m_angularMomentum += cross(localCollisionPos2, impulse);
+					}
+				}
+			}
+		}
+	}
+}
+
 void RigidBodySystem::draw(DrawingUtilitiesClass *duc)
 {
-	for (auto rb : m_rigidbodies) {
-		Mat4 scale(0.0);
-		scale.initScaling(rb.m_size.x, rb.m_size.y, rb.m_size.z);
-		Mat4 translate(0.0);
-		translate.initTranslation(rb.m_position.x, rb.m_position.y, rb.m_position.z);
-		duc->drawRigidBody(scale * rb.m_rotation.getRotMat() * translate);
+	for (auto &rb : m_rigidbodies) {
+		duc->drawRigidBody(rb.getTransformationMatrix());
 	}
 }
 
