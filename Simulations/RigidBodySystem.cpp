@@ -119,18 +119,19 @@ void RigidBodySystem::resolveCollisions(int demoId)
 				RigidBody *rb2 = &m_rigidbodies.at(j);
 				CollisionInfo ci = checkCollisionSAT(rb1->getTransformationMatrix(), rb2->getTransformationMatrix());
 				if (ci.isValid) {
+
 					Vec3 localCollisionPos1 = ci.collisionPointWorld - rb1->m_position;
 					Vec3 vel1 = rb1->m_velocity + cross(rb1->m_angularVelocity, localCollisionPos1);
 
 					Vec3 localCollisionPos2 = ci.collisionPointWorld - rb2->m_position;
 					Vec3 vel2 = rb2->m_velocity + cross(rb2->m_angularVelocity, localCollisionPos2);
 
+					rb1->m_position += ci.normalWorld * ci.depth * 0.5;
+					rb2->m_position -= ci.normalWorld * ci.depth * 0.5;
+
 					double relativeVelocity = dot(vel1 - vel2, ci.normalWorld);
 					if (relativeVelocity < 0.0)
 					{
-						rb1->m_position -= localCollisionPos1 * ci.depth * 0.5;
-						rb2->m_position -= localCollisionPos2 * ci.depth * 0.5;
-
 						double energyCoefficient = 0.5;
 						double impulseMagnitude = (-1.0 * (1.0 + energyCoefficient) * -relativeVelocity) / (
 							(1.0 / rb1->m_mass)

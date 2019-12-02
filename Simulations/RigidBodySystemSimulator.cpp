@@ -49,10 +49,11 @@ void RigidBodySystemSimulator::notifyCaseChanged(int testCase)
 	case 2:
 		cout << "Demo 3" << endl;
 		addRigidBody(Vec3(0.4, 0.1, 0.0), Vec3(0.3, 0.3, 0.3), 2.0);
-		applyForceOnBody(0, Vec3(0.0, 0.0, 0.0), Vec3(-200.0, 0.0, 0.0));
+		applyForceOnBody(0, Vec3(0.4, 0.1, 0.0), Vec3(-200.0, 0.0, 0.0));
 
 		addRigidBody(Vec3(-0.4, 0.0, 0.1), Vec3(0.3, 0.3, 0.3), 2.0);
-		applyForceOnBody(1, Vec3(0.0, 0.0, 0.0), Vec3(200.0, 0.0, 0.0));
+		applyForceOnBody(1, Vec3(-0.4, 0.0, 0.1), Vec3(200.0, 0.0, 0.0));
+		break;
 	case 3:
 		cout << "Demo 4" << endl;
 		addRigidBody(Vec3(0.4, 0.1, 0.0), Vec3(0.3, 0.3, 0.3), 2.0);
@@ -66,6 +67,7 @@ void RigidBodySystemSimulator::notifyCaseChanged(int testCase)
 
 		addRigidBody(Vec3(-0.4, -0.6, 0.1), Vec3(0.3, 0.3, 0.3), 2.0);
 		applyForceOnBody(3, Vec3(0.0, 0.0, 0.0), Vec3(0.0, 200.0, 0.0));
+		break;
 	default:
 		cout << "Empty Test!" << endl;
 		break;
@@ -86,7 +88,15 @@ void RigidBodySystemSimulator::externalForcesCalculations(float timeElapsed)
 		Vec3 inputWorld = worldViewInv.transformVectorNormal(inputView);
 
 		float inputScale = 0.1f;
-		applyForceOnBody(0, m_pRigidBodySystem->GetRigidBody(0)->m_position, inputWorld * inputScale);
+
+		if (m_iTestCase == 1)
+		{
+			applyForceOnBody(0, m_pRigidBodySystem->GetRigidBody(0)->m_position + Vec3(0.5, 0.0, 0.0), inputWorld * inputScale);
+		}
+		else
+		{
+			applyForceOnBody(0, m_pRigidBodySystem->GetRigidBody(0)->m_position, inputWorld * inputScale);
+		}
 	}
 }
 
