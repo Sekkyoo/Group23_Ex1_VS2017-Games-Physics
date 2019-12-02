@@ -1,0 +1,6 @@
+[Group Members]
+- Till Wuebbers
+- Philipp Busch
+
+[Info]
+In the demos 2 to 4 you can influence one of the rigidbodies with the mouse.
