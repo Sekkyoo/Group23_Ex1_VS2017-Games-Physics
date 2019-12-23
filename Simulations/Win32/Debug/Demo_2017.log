@@ -1,10 +1,12 @@
-﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\User\Group23_Ex1_VS2017-Games-Physics\Win32\Debug\effect.fxo
-  DiffusionSimulator.cpp
+﻿  DiffusionSimulator.cpp
 c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(11): warning C4005: 'NOMINMAX': macro redefinition
   c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp: note: see previous definition of 'NOMINMAX'
-c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(166): warning C4244: 'argument': conversion from 'Real' to 'int', possible loss of data
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(144): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(205): warning C4244: 'argument': conversion from 'Real' to 'int', possible loss of data
 c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(204): warning C4244: 'argument': conversion from 'const Scalar' to 'float', possible loss of data
           with
           [
@@ -24,7 +26,7 @@ c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(730): war
           [
               _Ty=double
           ]
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(165): note: see reference to class template instantiation 'SparsePCGSolver<Real>' being compiled
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(204): note: see reference to class template instantiation 'SparsePCGSolver<Real>' being compiled
 c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(777): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
           with
           [
@@ -61,48 +63,11 @@ c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(389): war
               _Ty=double,
               T=Real
           ]
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(172): note: see reference to function template instantiation 'bool SparsePCGSolver<Real>::solve(const SparseMatrix<double> &,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,T &,int &,int)' being compiled
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(211): note: see reference to function template instantiation 'bool SparsePCGSolver<Real>::solve(const SparseMatrix<double> &,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,T &,int &,int)' being compiled
           with
           [
               _Ty=double,
               T=Real
           ]
 c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(395): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
-  TemplateSimulator.cpp
-c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(11): warning C4005: 'NOMINMAX': macro redefinition
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\templatesimulator.cpp: note: see previous definition of 'NOMINMAX'
-c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(204): warning C4244: 'argument': conversion from 'const Scalar' to 'float', possible loss of data
-          with
-          [
-              Scalar=GamePhysics::Real
-          ]
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(203): note: while compiling class template member function 'DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const'
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(285): note: see reference to function template instantiation 'DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const' being compiled
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(859): note: see reference to class template instantiation 'GamePhysics::vector3Dim<GamePhysics::Real>' being compiled
-c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(777): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
-          with
-          [
-              Scalar=double
-          ]
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(773): note: while compiling class template member function 'DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)'
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(380): note: see reference to function template instantiation 'DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)' being compiled
-  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(379): note: see reference to class template instantiation 'GamePhysics::matrix4x4<double>' being compiled
-c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(776): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
-          with
-          [
-              Scalar=double
-          ]
-c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(775): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
-          with
-          [
-              Scalar=double
-          ]
-c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(774): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
-          with
-          [
-              Scalar=double
-          ]
-  FFmpeg.cpp
-  util.cpp
-  Generating Code...
   Demo_2017.vcxproj -> C:\Users\User\Group23_Ex1_VS2017-Games-Physics\Win32\Debug\Simulations.lib

@@ -14,6 +14,7 @@ public:
 	float heatEquation(int x, int y, float coefficient, float timestep);
 	void zeroBoundary();
 	void draw(DrawingUtilitiesClass *duc);
+	int getSize();
 	~Grid();
 
 private:
@@ -42,7 +43,7 @@ public:
 	// Specific Functions
 	void drawObjects();
 	Grid* diffuseTemperatureExplicit(float timestep);
-	void diffuseTemperatureImplicit();
+	void diffuseTemperatureImplicit(double timestep);
 
 private:
 	// Attributes
