@@ -21,9 +21,10 @@ using namespace GamePhysics;
 //#define ADAPTIVESTEP
 
 //#define TEMPLATE_DEMO
-#define MASS_SPRING_SYSTEM
+//#define MASS_SPRING_SYSTEM
 //#define RIGID_BODY_SYSTEM
 //#define SPH_SYSTEM
+#define DIFFUSION_SYSTEM
 
 #ifdef TEMPLATE_DEMO
 #include "TemplateSimulator.h"
@@ -36,6 +37,10 @@ using namespace GamePhysics;
 #endif
 #ifdef SPH_SYSTEM
 //#include "SPHSystemSimulator.h"
+#endif
+
+#ifdef DIFFUSION_SYSTEM
+#include "DiffusionSimulator.h"
 #endif
 
 DrawingUtilitiesClass * g_pDUC;
@@ -357,13 +362,12 @@ int main(int argc, char* argv[])
 	g_pDUC->g_camera.SetViewParams(XMLoadFloat3(&eye), XMLoadFloat3(&lookAt));
 	g_pDUC-> g_camera.SetButtonMasks(MOUSE_MIDDLE_BUTTON, MOUSE_WHEEL, MOUSE_RIGHT_BUTTON);
 
-	MassSpringSystemSimulator *  msss = new MassSpringSystemSimulator();
 
 #ifdef TEMPLATE_DEMO
 	g_pSimulator= new TemplateSimulator();
 #endif
 #ifdef MASS_SPRING_SYSTEM
-	g_pSimulator= msss;
+	g_pSimulator= new MassSpringSystemSimulator();
 #endif
 #ifdef RIGID_BODY_SYSTEM
 	//g_pSimulator= new RigidBodySystemSimulator();
@@ -371,8 +375,11 @@ int main(int argc, char* argv[])
 #ifdef SPH_SYSTEM
 	//g_pSimulator= new SPHSystemSimulator();
 #endif
+#ifdef DIFFUSION_SYSTEM
+	g_pSimulator= new DiffusionSimulator();
+#endif
 	g_pSimulator->reset();
-	
+
     // Init DXUT and create device
 	DXUTInit( true, true, NULL ); // Parse the command line, show msgboxes on error, no extra command line params
 	//DXUTSetIsInGammaCorrectMode( false ); // true by default (SRGB backbuffer), disable to force a RGB backbuffer

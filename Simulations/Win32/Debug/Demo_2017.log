@@ -1,47 +1,108 @@
-﻿  MassSpringSystemSimulator.cpp
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(11): warning C4005: "NOMINMAX": Makro-Neudefinition
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp: note: Siehe vorherige Definition von "NOMINMAX"
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.h(102): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.h(105): warning C4305: "Initialisierung": Verkürzung von "double" in "float"
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(111): warning C4305: "Argument": Verkürzung von "double" in "float"
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(115): warning C4305: "Argument": Verkürzung von "double" in "float"
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(319): warning C4244: "Initialisierung": Konvertierung von "double" in "float", möglicher Datenverlust
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(520): warning C4305: "Argument": Verkürzung von "double" in "float"
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(522): warning C4305: "Argument": Verkürzung von "double" in "float"
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(563): warning C4305: "Argument": Verkürzung von "double" in "float"
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(204): warning C4244: "Argument": Konvertierung von "const Scalar" in "float", möglicher Datenverlust
+﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\User\Group23_Ex1_VS2017-Games-Physics\Win32\Debug\effect.fxo
+  DiffusionSimulator.cpp
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(11): warning C4005: 'NOMINMAX': macro redefinition
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp: note: see previous definition of 'NOMINMAX'
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(166): warning C4244: 'argument': conversion from 'Real' to 'int', possible loss of data
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(204): warning C4244: 'argument': conversion from 'const Scalar' to 'float', possible loss of data
           with
           [
               Scalar=GamePhysics::Real
           ]
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(203): note: Bei der Kompilierung von Klasse Vorlage der DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const-Memberfunktion
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\drawingutilitiesclass.h(285): note: Siehe Verweis auf die Instanziierung der gerade kompilierten Funktions-Vorlage "DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const".
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(859): note: Siehe Verweis auf die Klasse Vorlage-Instanziierung "GamePhysics::vector3Dim<GamePhysics::Real>", die kompiliert wird.
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(1117): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1961): note: Siehe Deklaration von "_snprintf"
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\vectorbase.h(1115): note: Bei der Kompilierung von Klasse Vorlage der std::string GamePhysics::vector3Dim<GamePhysics::Real>::toString(void)-Memberfunktion
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\massspringsystemsimulator.cpp(189): note: Siehe Verweis auf die Instanziierung der gerade kompilierten Funktions-Vorlage "std::string GamePhysics::vector3Dim<GamePhysics::Real>::toString(void)".
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(777): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(203): note: while compiling class template member function 'DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const'
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(285): note: see reference to function template instantiation 'DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const' being compiled
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(859): note: see reference to class template instantiation 'GamePhysics::vector3Dim<GamePhysics::Real>' being compiled
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(730): warning C4244: 'argument': conversion from '__int64' to 'const unsigned int', possible loss of data
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(722): note: while compiling class template member function 'void SparsePCGSolver<Real>::apply_preconditioner(const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,int)'
+          with
+          [
+              _Ty=double
+          ]
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(656): note: see reference to function template instantiation 'void SparsePCGSolver<Real>::apply_preconditioner(const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,int)' being compiled
+          with
+          [
+              _Ty=double
+          ]
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(165): note: see reference to class template instantiation 'SparsePCGSolver<Real>' being compiled
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(777): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
           with
           [
               Scalar=double
           ]
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(773): note: Bei der Kompilierung von Klasse Vorlage der DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)-Memberfunktion
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\drawingutilitiesclass.h(380): note: Siehe Verweis auf die Instanziierung der gerade kompilierten Funktions-Vorlage "DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)".
-  c:\users\sekky\desktop\gamephysicstemplate-master\simulations\drawingutilitiesclass.h(379): note: Siehe Verweis auf die Klasse Vorlage-Instanziierung "GamePhysics::matrix4x4<double>", die kompiliert wird.
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(776): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(773): note: while compiling class template member function 'DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)'
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(380): note: see reference to function template instantiation 'DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)' being compiled
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(379): note: see reference to class template instantiation 'GamePhysics::matrix4x4<double>' being compiled
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(776): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
           with
           [
               Scalar=double
           ]
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(775): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(775): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
           with
           [
               Scalar=double
           ]
-c:\users\sekky\desktop\gamephysicstemplate-master\simulations\util\matrixbase.h(774): warning C4244: "Argument": Konvertierung von "Scalar" in "float", möglicher Datenverlust
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(774): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
           with
           [
               Scalar=double
           ]
-  Demo_2017.vcxproj -> C:\Users\sekky\Desktop\gamephysicstemplate-master\Win32\Debug\Simulations.lib
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(389): warning C4244: 'initializing': conversion from '__int64' to 'unsigned int', possible loss of data
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(667): note: see reference to function template instantiation 'void multiply<T>(const FixedSparseMatrix<T> &,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &)' being compiled
+          with
+          [
+              T=Real,
+              _Ty=double
+          ]
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(641): note: while compiling class template member function 'bool SparsePCGSolver<Real>::solve(const SparseMatrix<double> &,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,T &,int &,int)'
+          with
+          [
+              _Ty=double,
+              T=Real
+          ]
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\diffusionsimulator.cpp(172): note: see reference to function template instantiation 'bool SparsePCGSolver<Real>::solve(const SparseMatrix<double> &,const std::vector<double,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,T &,int &,int)' being compiled
+          with
+          [
+              _Ty=double,
+              T=Real
+          ]
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\pcgsolver.h(395): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+  TemplateSimulator.cpp
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(11): warning C4005: 'NOMINMAX': macro redefinition
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\templatesimulator.cpp: note: see previous definition of 'NOMINMAX'
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(204): warning C4244: 'argument': conversion from 'const Scalar' to 'float', possible loss of data
+          with
+          [
+              Scalar=GamePhysics::Real
+          ]
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(203): note: while compiling class template member function 'DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const'
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(285): note: see reference to function template instantiation 'DirectX::XMVECTOR GamePhysics::vector3Dim<GamePhysics::Real>::toDirectXVector(void) const' being compiled
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\vectorbase.h(859): note: see reference to class template instantiation 'GamePhysics::vector3Dim<GamePhysics::Real>' being compiled
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(777): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
+          with
+          [
+              Scalar=double
+          ]
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(773): note: while compiling class template member function 'DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)'
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(380): note: see reference to function template instantiation 'DirectX::XMMATRIX GamePhysics::matrix4x4<double>::toDirectXMatrix(void)' being compiled
+  c:\users\user\group23_ex1_vs2017-games-physics\simulations\drawingutilitiesclass.h(379): note: see reference to class template instantiation 'GamePhysics::matrix4x4<double>' being compiled
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(776): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
+          with
+          [
+              Scalar=double
+          ]
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(775): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
+          with
+          [
+              Scalar=double
+          ]
+c:\users\user\group23_ex1_vs2017-games-physics\simulations\util\matrixbase.h(774): warning C4244: 'argument': conversion from 'Scalar' to 'float', possible loss of data
+          with
+          [
+              Scalar=double
+          ]
+  FFmpeg.cpp
+  util.cpp
+  Generating Code...
+  Demo_2017.vcxproj -> C:\Users\User\Group23_Ex1_VS2017-Games-Physics\Win32\Debug\Simulations.lib
